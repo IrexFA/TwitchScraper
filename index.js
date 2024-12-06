@@ -276,7 +276,7 @@ async function updateStreamEndDates() {
     }, INTERVAL);
 }
 
-async function fetchTwitchDataAndUpdateEndDates() {
+async function fetchTwitchData() {
     const access_token = await getTwitchToken();
     await getChannelsInfo(access_token);
     await getGamesInfo(access_token);
@@ -285,8 +285,8 @@ async function fetchTwitchDataAndUpdateEndDates() {
 
 cron.schedule('*/10 * * * *', async () => {
     try {
-        console.log('Début de la tâche cron - récupération des données Twitch et mise à jour des end_dates');
-        await fetchTwitchDataAndUpdateEndDates();
+        console.log('Début de la tâche cron - récupération des données Twitch');
+        await fetchTwitchData();
         console.log('Tâche cron terminée avec succès.');
     } catch (error) {
         console.error('Erreur lors de l\'exécution de la tâche cron :', error);
